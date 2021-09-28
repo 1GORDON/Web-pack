@@ -1,4 +1,4 @@
-window.onload = () =>{
+window.onload = () => {
 
   let tasks = [
   {
@@ -36,6 +36,5 @@ window.onload = () =>{
   };
   
   displayToDo();
-  
   }
   
