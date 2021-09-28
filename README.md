@@ -1,14 +1,10 @@
 # Web-pack
 
-
-- Build a simple Todo List
-=======
-- Build  a simple Todo List
-
+- Build a simple Todo List.
 
 ## Live Demo
 
-https://1gordon.github.io/Web-pack/
+https://1gordon.github.io/Web-pack/dist/
 
 ## Built With
 
@@ -31,7 +27,6 @@ To get a local copy up and running follow these simple example steps.
 - GitHub: [@1GORDON](https://github.com/1GORDON)
 - Twitter: [@GTinyefuza](https://twitter.com/Tinyefuza)
 - LinkedIn: [LinkedIn](www.linkedin.com/in/tinyefuza-gordon-935747213)
-
 
 ## 🤝 Contributing
 
