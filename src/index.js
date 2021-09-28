@@ -1,30 +1,31 @@
-window.onload = () => {
+import './style.css';
 
-  let tasks = [
-  {
-    description: 'Finish my first project',
-    completed: false,
-    index: 0,
-  },
-  {
-    description: 'Finish my second project',
-    completed: false,
-    index: 1,
-  },
-  {
-    description: 'Finish my third project',
-    completed: false,
-    index: 2,
-  },
-  {
-    description: 'Finish my third project',
-    completed: false,
-    index: 2,
-  },
+window.onload = () => {
+  const tasks = [
+    {
+      description: 'Finish my first project',
+      completed: false,
+      index: 0,
+    },
+    {
+      description: 'Finish my second project',
+      completed: false,
+      index: 1,
+    },
+    {
+      description: 'Finish my third project',
+      completed: false,
+      index: 2,
+    },
+    {
+      description: 'Finish my third project',
+      completed: false,
+      index: 2,
+    },
   ];
-  
+
   const todoList = document.querySelector('.todoList');
-  
+
   const displayToDo = () => {
     tasks.forEach((task) => {
       todoList.innerHTML += `<label class="checkbox" for="myCheckboxId">
@@ -34,7 +35,6 @@ window.onload = () => {
     </label><hr>`;
     });
   };
-  
+
   displayToDo();
-  }
-  
+};
