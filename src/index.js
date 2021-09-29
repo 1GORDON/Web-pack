@@ -1,4 +1,5 @@
 import checkItem from './status.js';
+import './style.css';
 
 const tasks = [
   {
