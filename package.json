@@ -4,9 +4,8 @@
   "description": "Setting up a project with web-pack",
   "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack serve --open",
-    "build": "webpack"
+    "start": "webpack serve",
+    "build": "webpack --config webpack.config.js"
   },
   "repository": {
     "type": "git",
