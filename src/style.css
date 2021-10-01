@@ -33,8 +33,17 @@ header {
   padding-right: 10px;
 }
 
+.input-list {
+  display: flex;
+  justify-content: space-between;
+}
+
 .fas {
   color: rgb(139, 137, 137);
+}
+
+.fa-trash-alt {
+  display: none !important;
 }
 
 header span {
@@ -70,10 +79,6 @@ input {
   align-items: center;
   margin-right: 10px;
   cursor: pointer;
-}
-
-.fa {
-  color: rgb(139, 137, 137);
 }
 
 .todoList {
