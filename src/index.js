@@ -1,32 +1,32 @@
 import checkItem from './status.js';
-import './style.css';
+// import './style.css';
 
-const tasks = [
-  {
-    description: 'Finish my first project',
-    completed: false,
-    id: 1,
-  },
-  {
-    description: 'Finish my second project',
-    completed: false,
-    id: 2,
-  },
-  {
-    description: 'Finish my third project',
-    completed: false,
-    id: 3,
-  },
-  {
-    description: 'Finish my third project',
-    completed: false,
-    id: 4,
-  },
-];
+// const tasks = [
+//   {
+//     description: 'Finish my first project',
+//     completed: false,
+//     id: 1,
+//   },
+//   {
+//     description: 'Finish my second project',
+//     completed: false,
+//     id: 2,
+//   },
+//   {
+//     description: 'Finish my third project',
+//     completed: false,
+//     id: 3,
+//   },
+//   {
+//     description: 'Finish my third project',
+//     completed: false,
+//     id: 4,
+//   },
+// ];
 
-if (!localStorage.getItem('todo')) {
-  localStorage.setItem('todo', JSON.stringify(tasks));
-}
+// if (!localStorage.getItem('todo')) {
+//   localStorage.setItem('todo', JSON.stringify(tasks));
+// }
 
 const todos = JSON.parse(localStorage.getItem('todo') || '[]');
 
@@ -48,3 +48,33 @@ for (let i = 0; i < todos.length; i += 1) {
     localStorage.setItem('todo', JSON.stringify(todos));
   });
 }
+
+// Create a function to add products to the local storage.
+// product is avariable that represents inputs
+
+const addTask = (product) => {
+  todos.push(product);
+  localStorage.setItem('todo', JSON.stringify(todos));
+  window.location.reload();
+};
+
+const removeTask = (product) => {
+  todos.filter(product)
+}
+
+// Whenever you want to add an event listener to an element,
+// always target an element,
+// add event listener, and
+// then call a function
+
+const inputElements = document.getElementById('input-box');
+inputElements.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    const newTask = {
+      description: inputElements.value,
+      completed: false,
+      id: todos.length + 1,
+    };
+    addTask(newTask);
+  }
+});
