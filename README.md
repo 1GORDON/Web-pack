@@ -1,6 +1,11 @@
 # Web-pack
 
-- Build a simple Todo List.
+In this project i acheived the following
+
+- Implemented a function for adding a new task (add a new element to the array).
+- Implemented a function for editing task descriptions.
+- Implemented a function for deleting a task (remove an element from the array).
+- Implemented a function for the "Clear all completed" button (use filter() method)
 
 ## Live Demo
 

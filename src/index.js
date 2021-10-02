@@ -11,7 +11,7 @@ window.onload = () => {
           <input type="input" class="edit-input no-outline">
         </div>
         <div>
-          <i class="fas fa-trash-alt"></i>
+          <i class="fas fa-trash-alt trash"></i>
           <i class="fas fa-ellipsis-v"></i>
         </div>
       </li>

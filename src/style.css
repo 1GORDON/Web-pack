@@ -42,8 +42,8 @@ header {
   color: rgb(139, 137, 137);
 }
 
-.fa-trash-alt {
-  display: none !important;
+.trash {
+  display: none;
 }
 
 .no-outline {
@@ -176,13 +176,6 @@ hr {
 
 .check-box {
   margin-right: 4px;
-}
-
-.delete-icon {
-  background-image: url(/src/assets/menu.png);
-  background-size: cover;
-  height: 13px;
-  width: 13px;
 }
 
 .footer {
