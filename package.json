@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/1GORDON/Web-pack#readme",
   "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.15.4",
     "babel-eslint": "^10.1.0",
     "css-loader": "^6.3.0",
     "csv-loader": "^3.0.3",
