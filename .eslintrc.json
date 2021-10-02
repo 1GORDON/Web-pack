@@ -23,10 +23,12 @@
                 "json": "always"
             }
         ],
-        "import/no-unresolved": [
-            2, 
-            { "caseSensitive": false }
-        ]
+        "import/resolver": {
+            "node": {
+                "extensions": [".js", ".jsx", ".ts", ".tsx"],
+                "moduleDirectory": ["node_modules", "src/"]
+            }
+        }
     },
     "ignorePatterns": [
         "dist/",
