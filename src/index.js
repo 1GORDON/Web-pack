@@ -1,55 +1,22 @@
-import checkItem from './status.js';
-// import './style.css';
-
-// const tasks = [
-//   {
-//     description: 'Finish my first project',
-//     completed: false,
-//     id: 1,
-//   },
-//   {
-//     description: 'Finish my second project',
-//     completed: false,
-//     id: 2,
-//   },
-//   {
-//     description: 'Finish my third project',
-//     completed: false,
-//     id: 3,
-//   },
-//   {
-//     description: 'Finish my third project',
-//     completed: false,
-//     id: 4,
-//   },
-// ];
-
-// if (!localStorage.getItem('todo')) {
-//   localStorage.setItem('todo', JSON.stringify(tasks));
-// }
 window.onload = () => {
   const todos = JSON.parse(localStorage.getItem('todo') || '[]');
-
   const todoList = document.querySelector('.todoList');
 
   todos.forEach(({ description, id, completed }) => {
-    todoList.innerHTML += `<li class="input-list">
-  <div><input type="checkbox" ${completed && 'checked'} class="check-box" id="check-${id}">${description}</div>
-  <div><input type="input" class="li-input"></div>
-  <div><i class="fas fa-trash-alt"></i><i class="fas fa-ellipsis-v"></i></div>
-  </li><hr>`;
+    todoList.innerHTML += `
+      <li class="listElements">
+        <div class="d-flex center-items list-group-1">
+          <input type="checkbox" ${completed && 'checked'} class="check-box" id="check-${id}">
+          <p class="task-description ${completed ? 'text-line' : ''}">${description}</p>
+          <input type="input" class="edit-input no-outline">
+        </div>
+        <div>
+          <i class="fas fa-trash-alt"></i>
+          <i class="fas fa-ellipsis-v"></i>
+        </div>
+      </li>
+      <hr>`;
   });
-
-  for (let i = 0; i < todos.length; i += 1) {
-    const inCheck = document.querySelector(`#check-${todos[i].id}`);
-    inCheck.addEventListener('change', (e) => {
-      checkItem(i, e, todos);
-      localStorage.setItem('todo', JSON.stringify(todos));
-    });
-  }
-
-  // Create a function to add products to the local storage.
-  // product is avariable that represents inputs
 
   const addTask = (entry) => {
     todos.push(entry);
@@ -57,41 +24,41 @@ window.onload = () => {
     window.location.reload();
   };
 
-  // const removeTask = () => {
-  //   const todos = todos.filter((element) => element -= 1);
-  //   localStorage.setItem('todo', JSON.stringify(todos));
-  //   window.location.reload();
-  // };
+  const deleteTask = (index) => {
+    const currentTasks = todos.filter((todo, todoIndex) => todoIndex !== index);
+    localStorage.setItem('todo', JSON.stringify(currentTasks));
+    window.location.reload();
+  };
 
-  // const liElements = document.querySelector('.check-box');
-  // liElements.addEventListener('keydown', (e) => {
-  //   if (e.key === 'Enter') {
-  //     const newTask = {
-  //       description: liElements.value,
-  //       completed: false,
-  //       id: todos.length - 1,
-  //     };
-  //     removeTask(newTask);
-  //   }
-  // });
-
-  // Whenever you want to add an event listener to an element,
-  // always target an element,
-  // add event listener, and
-  // then call a function
-  const deleteIcon = document.querySelector('.fa-trash-alt');
-  document.querySelectorAll('.input-list').forEach((element, index) => { 
-    element.addEventListener('click', (e) => {
-      const children = element.childNodes[3].childNodes[0];
-      children.style.display = 'visible !important';
-      console.log(children);
+  const editTask = (index, text) => {
+    todos.filter((todo, todoIndex) => {
+      if (index === todoIndex) {
+        todo.description = text;
+        todos.splice(index, 1, todo);
+      }
+      return false;
     });
-  });
+    localStorage.setItem('todo', JSON.stringify(todos));
+    window.location.reload();
+  };
 
-  const inputElement = document.querySelector('.input-list');
-    element.addEventListener('click', (e) => {
-      inputElement.style
-  });
+  const changeTaskStatus = (index, status) => {
+    todos.filter((todo, todoIndex) => {
+      if (index === todoIndex) {
+        todo.completed = status;
+        todos.splice(index, 1, todo);
+      }
+      return false;
+    });
+    localStorage.setItem('todo', JSON.stringify(todos));
+    window.location.reload();
+  };
+
+  const clearCompleted = () => {
+    const newTodos = todos.filter((todo) => todo.completed !== true);
+    localStorage.setItem('todo', JSON.stringify(newTodos));
+    window.location.reload();
+  };
 
   const inputElements = document.getElementById('input-box');
   inputElements.addEventListener('keydown', (e) => {
@@ -103,5 +70,54 @@ window.onload = () => {
       };
       addTask(newTask);
     }
+  });
+
+  document.querySelectorAll('.listElements').forEach((element, index) => {
+    element.addEventListener('dblclick', () => {
+      element.style.backgroundColor = 'bisque';
+      const deleteIcon = element.childNodes[3].childNodes[1];
+      const ellipsisIcon = element.childNodes[3].childNodes[3];
+      const taskDescription = element.childNodes[1].childNodes[3];
+      const editInput = element.childNodes[1].childNodes[5];
+
+      // hide / show the icons
+      deleteIcon.style.display = 'flex';
+      ellipsisIcon.style.display = 'none';
+      editInput.style.display = 'flex';
+      taskDescription.style.display = 'none';
+
+      element.addEventListener('mouseleave', () => {
+        element.style.backgroundColor = 'transparent';
+        deleteIcon.style.display = 'none';
+        editInput.style.display = 'none';
+        ellipsisIcon.style.display = 'flex';
+        taskDescription.style.display = 'flex';
+      });
+
+      deleteIcon.addEventListener('click', () => {
+        deleteTask(index);
+      });
+
+      editInput.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+          const { value } = editInput;
+          editTask(index, value);
+        }
+      });
+    });
+  });
+
+  document.querySelectorAll('.check-box').forEach((element, index) => {
+    element.addEventListener('change', () => {
+      if (element.checked) {
+        changeTaskStatus(index, true);
+      } else {
+        changeTaskStatus(index, false);
+      }
+    });
+  });
+
+  document.querySelector('.clear-all-completed').addEventListener('click', () => {
+    clearCompleted();
   });
 };
