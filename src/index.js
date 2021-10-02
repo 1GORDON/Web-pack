@@ -1,3 +1,8 @@
+import {
+  addTask, deleteTask, editTask, clearCompleted,
+} from './status.js';
+import './style.css';
+
 window.onload = () => {
   const todos = JSON.parse(localStorage.getItem('todo') || '[]');
   const todoList = document.querySelector('.todoList');
@@ -18,30 +23,6 @@ window.onload = () => {
       <hr>`;
   });
 
-  const addTask = (entry) => {
-    todos.push(entry);
-    localStorage.setItem('todo', JSON.stringify(todos));
-    window.location.reload();
-  };
-
-  const deleteTask = (index) => {
-    const currentTasks = todos.filter((todo, todoIndex) => todoIndex !== index);
-    localStorage.setItem('todo', JSON.stringify(currentTasks));
-    window.location.reload();
-  };
-
-  const editTask = (index, text) => {
-    todos.filter((todo, todoIndex) => {
-      if (index === todoIndex) {
-        todo.description = text;
-        todos.splice(index, 1, todo);
-      }
-      return false;
-    });
-    localStorage.setItem('todo', JSON.stringify(todos));
-    window.location.reload();
-  };
-
   const changeTaskStatus = (index, status) => {
     todos.filter((todo, todoIndex) => {
       if (index === todoIndex) {
@@ -54,21 +35,15 @@ window.onload = () => {
     window.location.reload();
   };
 
-  const clearCompleted = () => {
-    const newTodos = todos.filter((todo) => todo.completed !== true);
-    localStorage.setItem('todo', JSON.stringify(newTodos));
-    window.location.reload();
-  };
-
   const inputElements = document.getElementById('input-box');
   inputElements.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
       const newTask = {
         description: inputElements.value,
         completed: false,
-        id: todos.length + 1,
+        index: todos.length + 1,
       };
-      addTask(newTask);
+      addTask(newTask, todos);
     }
   });
 
@@ -95,7 +70,7 @@ window.onload = () => {
       });
 
       deleteIcon.addEventListener('click', () => {
-        deleteTask(index);
+        deleteTask(index, todos);
       });
 
       editInput.addEventListener('keydown', (event) => {
