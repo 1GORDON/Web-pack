@@ -9,7 +9,7 @@ In this project i acheived the following
 
 ## Live Demo
 
-https://1gordon.github.io/Web-pack/dist/
+https://1gordon.github.io/Web-pack/
 
 ## Built With
 
